@@ -18,7 +18,7 @@
 
 .margin {
   /* insira aqui uma margem de 30px na classe abaixo para aplicá-la aos itens C e D */
-  margin:30px;
+  margin: 30px;
 }
 
 .border {
@@ -28,5 +28,4 @@
 
 .teste {
   border: 30px solid sienna;
-  }
-
+}
