@@ -15,5 +15,3 @@ function asteriskString (stringsize){
 }
 
 asteriskString(5);
-asteriskString(5);
-asteriskString(5);
