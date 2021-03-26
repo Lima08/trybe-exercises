@@ -8,13 +8,13 @@ n = 5
 *****
 *****/
 
-function table () {
-  let sizeTable = 5;
+function table (number) {
+  let sizeTable = number;
 
   for (let asterisk = '*'; asterisk.length <= sizeTable; asterisk += '*') {
    for (var asterisk1 = '*'; asterisk1.length < sizeTable; asterisk1 += '*') {}
    console.log(asterisk1);
   }
 }
-table();
-table();
+table(2);
+
