@@ -8,10 +8,10 @@ n = 5
 ****
 ***** */
 
-function asteriskString (stringsize){
+function asteriskString(stringsize) {
   for (let asterisk = "*"; asterisk.length <= stringsize; asterisk += "*") {
     console.log(asterisk);
   }
-}
+}   
 
 asteriskString(5);
