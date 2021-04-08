@@ -24,3 +24,6 @@ noEmergencyTasks.style.backgroundColor = 'yellow';
 
 let footer = document.querySelector('#footer-container');
 footer.style.backgroundColor = 'darkgreen'
+
+
+
