@@ -63,11 +63,14 @@ firstBoard.style.backgroundColor = 'rgb(76,164,109)';
  let board = document.getElementsByClassName('center-content')[0];
 board.style.backgroundColor = 'white';
  // Crie uma função que corrija o texto da tag <h1>.
-
+let title = document.getElementsByClassName('title')[0];
+title.innerText = 'Exercício 5.1 - JavaScript'
  // Crie uma função que modifique todo o texto da tag <p> para maiúsculo.
-
+let tagUpercase = document.getElementsByTagName('p')[0]
+tagUpercase.style.textTransform = 'uppercase';
  // Crie uma função que exiba o conteúdo de todas as tags <p> no console.
-
+let listP = document.getElementsByClassName('center-content').textContent
+console.log(listP)
     </script>
   </body>
 </html>
