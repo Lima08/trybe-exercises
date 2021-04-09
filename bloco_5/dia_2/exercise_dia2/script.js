@@ -1,4 +1,4 @@
-// 3- Adicione a tag div com a classe center-content como filho da tag div criada no passo 2;
+
 // 4- Adicione a tag p como filho do div criado no passo 3 e coloque algum texto;
 // 5- Adicione a tag div com a classe left-content como filho da tag div criada no passo 2;
 // 6- Adicione a tag div com a classe right-content como filho da tag div criada no passo 2;
@@ -16,3 +16,8 @@ body.appendChild(h1);
 let div = document.createElement('div');
 body.appendChild(div);
 div.className += 'main-content';
+
+// 3- Adicione a tag div com a classe center-content como filho da tag div criada no passo 2;
+let div2 = document.createElement('div');
+div2.className += 'center-content';
+div.appendChild(div2);
