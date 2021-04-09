@@ -1,5 +1,3 @@
-// 9- Adicione 3 tags h3 , todas sendo filhas do div criado no passo 2.
-
 // 1- Adicione a tag h1 com o texto Exercício 5.2 - JavaScript DOM como filho da tag body ;
 let body = document.querySelector('body');
 let h1 = document.createElement('h1');
@@ -47,4 +45,10 @@ for (let index = 0; index < 10; index += 1) {
 }
 div4.appendChild(list);
 
+// 9- Adicione 3 tags h3 , todas sendo filhas do div criado no passo 2.
+for (index = 0; index < 3; index +=1) {
+  let tagh3 = document.createElement('h3');
+  tagh3.innerText = 'Tag H3 dinâmica';
+  div.appendChild(tagh3);
+}
 
