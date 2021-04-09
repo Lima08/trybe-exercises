@@ -1,4 +1,4 @@
-// 7- Adicione uma imagem com src configurado para o valor https://picsum.photos/200 e classe small-image . Esse elemento deve ser filho do div criado no passo 5;
+
 // 8- Adicione uma lista não ordenada com os valores de 1 a 10 por extenso como valores da lista. Essa lista deve ser filha do div criado no passo 6;
 // 9- Adicione 3 tags h3 , todas sendo filhas do div criado no passo 2.
 
@@ -32,3 +32,11 @@ div.appendChild(div3);
 let div4 = document.createElement('div');
 div4.className += 'right-content';
 div.appendChild(div4);
+
+// 7- Adicione uma imagem com src configurado para o valor https://picsum.photos/200 e classe small-image . Esse elemento deve ser filho do div criado no passo 5;
+let img = document.createElement('img');
+img.src="https://picsum.photos/200";
+img.className += 'small-image';
+div3.appendChild(img);
+
+
