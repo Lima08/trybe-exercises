@@ -53,10 +53,6 @@ for (index = 0; index < 3; index +=1) {
 }
 
 // EX parte 2
-
-// 5- Troque a cor de fundo do elemento pai da div criada no passo 3 (aquela que possui a classe center-content ) para a cor verde;
-// 6- Remova os dois últimos elementos ( nove e dez ) da lista criada no passo 8.
-
 // 1- Adicione a classe title na tag h1 criada;
 h1.className += 'title';
 
@@ -72,3 +68,12 @@ div.removeChild(div3);
 // 4- Centralize o div criado no passo 6 (aquele que possui a classe right-content ). Dica: para centralizar, basta configurar o margin-right: auto do div ;
 div4.style.marginRight = 'auto';
 
+
+// 5- Troque a cor de fundo do elemento pai da div criada no passo 3 (aquela que possui a classe center-content ) para a cor verde;
+let mudaCor = document.getElementsByClassName('center-content').parentElement;
+
+
+
+
+// 6- Remova os dois últimos elementos ( nove e dez ) da lista criada no passo 8.
+console.log(list.LastChild)
