@@ -1,0 +1,26 @@
+h1,
+p {
+  text-align: center;
+}
+
+h1:hover {
+  background-color: blue;
+}
+
+p:hover {
+  background-color: blue;
+}
+
+h1:active {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+p:active {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.list {
+  list-style: none;
+  margin-left: 40%;
+}
+
