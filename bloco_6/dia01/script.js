@@ -46,6 +46,5 @@ function setOption(stateObject) {
   }
   return newSection;
 }
-
 // Chama as funções e renderiza as options da tag selected
 labelStates.appendChild(setOption(statesList));
