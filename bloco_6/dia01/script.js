@@ -28,34 +28,24 @@ const statesList = {
   TO:'Tocantins'
 };
 
-const sectionStatus = document.getElementById('state-list');
-const input = document.createElement('option');
-input.value = 'lima';
-input.innerText = '08'
-sectionStatus.appendChild(input);
-const input2 = document.createElement('option');
-input2.value = 'joao';
-input2.innerText = '07'
-sectionStatus.appendChild(input2);
-// Criar uma função que recupere o select do dom e crie suas <options> dinamicamente, atribuindo innertext e value 
-// loop for
+const labelStates = document.getElementById('label');
+
 function createOption() {
  const option = document.createElement('option');
  return option;
 }
 
 function setOption(stateObject) {
-  for (let variable in stateObject) {
-    createOption.AC;
+  const newSection = document.createElement('select');
+  newSection.id = 'state-list';
+  for (let proprity in stateObject) {
+    const newInput = createOption();
+    newInput.innerText = stateObject[proprity];
+    newInput.value = proprity;
+    newSection.appendChild(newInput);
   }
-  // cria a quantidade de options iqual a quantidade de chaves no objeto.
-  // Cria a section e adiciona todas as options na section
-  // Devolve a section com options com value( valor da propriedade) e innerText(propriedade) definidos pelo objeto
+  return newSection;
 }
 
-for (x in statesList) {
-  console.log(statesList[x])
-  }
-  for (x in statesList) {
-    console.log(x)
-    }
+// Chama as funções e renderiza as options da tag selected
+labelStates.appendChild(setOption(statesList));
