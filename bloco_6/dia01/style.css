@@ -1,0 +1,17 @@
+* {
+  text-align: center;
+}
+
+body {
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+form fieldset{
+  background-color: rgb(236, 236, 236);
+}
+
+fieldset h1 {
+  font-size:60px;
+}

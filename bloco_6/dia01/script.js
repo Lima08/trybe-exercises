@@ -1,3 +1,5 @@
+const labelStates = document.getElementById('label');
+
 const statesList = {
   AC:'Acre',
   AL:'Alagoas',
@@ -28,8 +30,6 @@ const statesList = {
   TO:'Tocantins'
 };
 
-const labelStates = document.getElementById('label');
-
 function createOption() {
  const option = document.createElement('option');
  return option;
@@ -46,5 +46,9 @@ function setOption(stateObject) {
   }
   return newSection;
 }
-// Chama as funções e renderiza as options da tag selected
+
 labelStates.appendChild(setOption(statesList));
+
+// criar função que adiciona label na tela e configura com ID, for e conteudo
+// criar função que renderiza as criações na tela
+// 

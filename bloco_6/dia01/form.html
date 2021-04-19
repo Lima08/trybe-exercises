@@ -10,7 +10,7 @@
   <body>
     <form>
       <fieldset>
-        Currículo <br /><br />
+        <legend><h1>Currículo</h1></legend>
         <label for="full-name">Nome completo:</label>
         <input
           type="text"
@@ -42,33 +42,44 @@
           size="26"
           required
         />
-        <br /><br />
+         <br /><br />
         <label for="my-adress"> Endereço:</label>
         <input 
-        type="text"
-        name="adress"
-        id="my-adress"
-        maxlength="200"
-        placeholder="Digite seu endereço"
-        size="22"
-        required
+          type="text"
+          name="adress"
+          id="my-adress"
+          maxlength="200"
+          placeholder="Digite seu endereço"
+          size="22"
+          required
         />
-        <br /><br />
+          <br /><br />
         <label for="my-city"> Cidade:</label>
         <input type="text"
-        name="city"
-        id="my-city"
-        maxlength="28"
-        placeholder="Digite sua cidade"
-        size="24"
-        required 
-        />
-        <br /><br />
-        <label id="label" for="state"> Estado:</label>
-        <select id="state-list">
-          <option value="oi"></option>
-        </select>
-              
+          name="city"
+          id="my-city"
+          maxlength="28"
+          placeholder="Digite sua cidade"
+          size="24"
+          required 
+         />
+        <br> <br>
+          <!-- Falta adicionar o campo required  -->
+         <label id="label" for="state-list"> Estado: </label>
+        <br> <br>
+        <label for="op1">
+          <input type="radio" value="casa" name="moradia" id="op1">Casa
+        </label>
+        <label for="op2">
+          <input type="radio" value="ap" name="moradia" id="op2">Apartamento
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <label for="text-1"></label>
+        <h2>Resumo curricular</h2>
+        <textarea name="resumo-curriculo" id="text-1" cols="30" rows="5" placeholder="mimimi"></textarea>
+        
       </fieldset>
     </form>
   </body>
