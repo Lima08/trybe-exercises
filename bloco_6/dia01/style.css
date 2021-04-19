@@ -8,7 +8,7 @@ body {
   margin-left: auto;
 }
 
-form {
+form fieldset{
   background-color: rgb(236, 236, 236);
 }
 
