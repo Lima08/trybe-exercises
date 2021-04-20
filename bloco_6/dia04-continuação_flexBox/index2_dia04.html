@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS FLEXBOX - ORDER</title>
+    <style>
+      .container {
+        border: 1px solid black;
+        display: flex;
+        height: 50px;
+        margin: 0px;
+        padding: 0;
+        width: auto;
+        flex-wrap: nowrap;
+      }
+
+      body {
+        margin: 0;;
+      }
+
+      .box {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 20%;
+        align-content: flex-end;
+        
+      }
+
+      .one {
+        background-color: #FBD26A;
+        display: flex;
+        /* Altere a propriedade order. */
+        order: 1;
+      }
+
+      .two {
+        background-color: #FAA488;
+        display: flex;
+        /* Altere a propriedade order. */
+        order: 2;
+      }
+
+      .three {
+        background-color: #9069EF;
+        display: flex;
+        /* Altere a propriedade order. */
+        order: 3;
+      }
+
+      .four {
+        background-color: #006472;
+        display: flex;
+        /* Altere a propriedade order. */
+        order: 4;
+      }
+
+    </style>
+  </head>
+  <body>
+    <a href="index_dia04.html">Ir para: Primeiro  </a><br>
+    <a href="index3_dia04.html">Ir para: Terceiro  </a><br>
+    <a href="index4_dia04.html">Ir para: Quarto  </a><br>
+    <a href="index5_dia04.html">Ir para: Quinto  </a>
+    <div class="container">
+      <div class="box one">1asdfasdfasdfasdf</div>
+      <div class="box two">2asdfasdfasdf</div>
+      <div class="box three">3asdfasdfasdf</div>
+      <div class="box four">4asfasdfasdf</div>
+    </div>
+  </body>
+</html>
