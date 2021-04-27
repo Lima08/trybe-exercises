@@ -51,4 +51,5 @@ labelStates.appendChild(setOption(statesList));
 
 // criar função que adiciona label na tela e configura com ID, for e conteudo
 // criar função que renderiza as criações na tela
-// 
+// teste
+let teste = document.createElement('input');
