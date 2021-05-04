@@ -68,13 +68,16 @@ const books = [
 const expectedResult = false;
 
 function authorUnique() {
-  // EX 07  Faça uma função que retorne true , caso nenhum author tenha nascido no mesmo ano, e false , caso contrário.
+  const arrayTest = [];
+  let isTrue = true; // se não tiver idades iguais retorna true.
   books.forEach((obj) => {
-    const authorBirth = obj.author.birthYear;
-    
-    authorBirth.forEach((obj2) => {
-     obj2.author.birthYear === authorBirth;
-    })
-});
+    if (arrayTest.some((yearB) => yearB === obj.author.birthYear)) {
+      isTrue = false;
+    }
+    arrayTest.push(obj.author.birthYear);
+  })
+  return isTrue;
+  }
 console.log(authorUnique())
-assert.strictEqual(authorUnique(), expectedResult);
+assert.strictEqual(authorUnique(), expectedResult)
+// Feito com a ajuda da sala A - A sala mais legal - Filizzola, Tales, Rodrigo, Victor e Alexandre.
