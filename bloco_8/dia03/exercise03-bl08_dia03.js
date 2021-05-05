@@ -118,5 +118,5 @@ const expectedResult = [
   },
 ];
 
-// console.log(fantasyOrScienceFiction());
+console.log(fantasyOrScienceFiction());
 assert.deepStrictEqual(fantasyOrScienceFiction(), expectedResult);
