@@ -21,3 +21,4 @@ assert.strictEqual(sum(0, 0), 0, 'Soma de 0 e 0 é 0');
 assert.throws(() =>{ sum(4, "5"); });
 assert.throws(() =>{ sum(4, "5"); }, /^Error: parameters must be numbers$/ );
 
+
