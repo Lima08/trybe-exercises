@@ -17,9 +17,9 @@ function myFizzBuzz(num) {
 }
 // console.log(myFizzBuzz('n'));
 
-assert.strictEqual(myFizzBuzz(15), 'fizzbuzz')
-assert.strictEqual(myFizzBuzz(6), 'fizz')
-assert.strictEqual(myFizzBuzz(10), 'buzz')
-assert.strictEqual(myFizzBuzz(1), 1)
-assert.strictEqual(myFizzBuzz('a'), false)
+// assert.strictEqual(myFizzBuzz(15), 'fizzbuzz')
+// assert.strictEqual(myFizzBuzz(6), 'fizz')
+// assert.strictEqual(myFizzBuzz(10), 'buzz')
+// assert.strictEqual(myFizzBuzz(1), 1)
+// assert.strictEqual(myFizzBuzz('a'), false)
 

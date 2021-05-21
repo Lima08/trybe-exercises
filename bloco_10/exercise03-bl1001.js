@@ -20,13 +20,13 @@ function myRemoveWithoutCopy(arr, item) {
 }
 // console.log(myRemoveWithoutCopy([1, 2, 3, 4], 3));
 
-const arr = [1, 2, 3, 4, 5];
+// const arr = [1, 2, 3, 4, 5];
 
-assert.strictEqual(typeof myRemoveWithoutCopy, 'function');
-assert.deepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 3), [ 1, 2, 4 ]);
-assert.notDeepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 3), [1, 2, 3, 4]);
+// assert.strictEqual(typeof myRemoveWithoutCopy, 'function');
+// assert.deepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 3), [ 1, 2, 4 ]);
+// assert.notDeepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 3), [1, 2, 3, 4]);
 
-myRemoveWithoutCopy(arr, 5);
-assert.deepStrictEqual( arr, [1, 2, 3, 4]);
+// myRemoveWithoutCopy(arr, 5);
+// assert.deepStrictEqual( arr, [1, 2, 3, 4]);
 
-assert.deepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 5), [ 1, 2, 3, 4 ]);
+// assert.deepStrictEqual(myRemoveWithoutCopy([1, 2, 3, 4], 5), [ 1, 2, 3, 4 ]);
