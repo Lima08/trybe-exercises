@@ -1,11 +1,11 @@
-const uppercase = (str, callback) => {
-  callback(str.toUpperCase());
+const uppercase = (str, callBack) => {
+   callBack(str.toUpperCase());
 };
 
 it('Testing if function uppercase return LIMALIMA', () => {
   expect.assertions(1);
 
-  uppercase('limalima', (result) => {
-    expect(result).toBe('LIMALIMA')
-  });
+  uppercase('lima', (result)=> {
+    expect(result).toEqual('LIMA')
+  })
 });
