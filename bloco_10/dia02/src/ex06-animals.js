@@ -45,15 +45,32 @@ const findAnimalByName = (name) => (
 
 );
 
-const getAnimal = (name) => {
-  return findAnimalByName(name).then(animal => animal)
+// console.log(getAnimal('Dorminhoco'));
+
+// 6.2. Adicione uma nova funcionalidade para buscar pela idade dos animais. O retorno deve ser um array de objetos, mas, caso não ache nenhum, retorne uma mensagem de erro. Escreva tanto a função como o seu teste.
+
+const findAnimalsByAge = (age) => (
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const animalAge = Animals.filter(animal => animal.age === age);
+      if (animalAge.length > 0) {
+        return resolve(animalAge);
+      };
+
+      return reject({ error: 'There are not animals of that age' });
+    }, 100);
+  })
+);
+
+const getAnimal = (data) => {
+  if (typeof data === 'string') {
+    return findAnimalByName(data).then(animal => animal);
+  };
+  return findAnimalsByAge(data).then(animal => console.log(animal));
 };
 
-// console.log(getAnimal('Dorminhoco'));
+console.log(getAnimal(1))
 
 module.exports = {
   getAnimal
 };
-// ---------------------
-
-// 6.2. Adicione uma nova funcionalidade para buscar pela idade dos animais. O retorno deve ser um array de objetos, mas, caso não ache nenhum, retorne uma mensagem de erro. Escreva tanto a função como o seu teste.
