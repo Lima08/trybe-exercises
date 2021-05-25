@@ -1,0 +1,46 @@
+// O código abaixo busca no GitHub de um usuário, de acordo com a URL, seus repositórios, e retorna uma lista como resultado. Dada a URL 'https://api.github.com/orgs/tryber/repos' , faça um teste que verifique que os repositórios 'sd-01-week4-5-project-todo-list' e 'sd-01-week4-5-project-meme-generator' se encontram nessa lista.
+// const fetch = require('node-fetch');
+
+// const getRepos = (url) => {
+//   return fetch(url)
+//     .then(response => response.json())
+//     // .then((data) => {
+//     //   return data.map((repo) => repo.name);
+//     // });
+// };
+
+// getRepos('https://api.github.com/orgs/tryber/repos').then(result => console.log(result));
+
+// const url = 'https://api.github.com/orgs/tryber/repos';
+
+// describe('test', () => {
+//   it('getRepos', () => {
+//     expect.assertions(1);
+//     return getRepos(url).then(list => expect(list).toContain('sd-01-week4-5-project-todo-list'));
+//   });
+
+//   // it('reject', () => {
+//   //   expect.assertions(1);
+//   //   return getRepos(url).then(list => expect(list).toContain('sd-01-week4-5-project-meme-generator'));
+
+//   // });
+
+// });
+
+
+// O código abaixo busca no GitHub de um usuário, de acordo com a URL, seus repositórios, e retorna uma lista como resultado. Dada a URL 'https://api.github.com/orgs/tryber/repos' , faça um teste que verifique que os repositórios 'sd-01-week4-5-project-todo-list' e 'sd-01-week4-5-project-meme-generator' se encontram nessa lista.
+
+const { getRepos } = require('../src/ex04-getRepos');
+
+const url = 'https://api.github.com/orgs/tryber/repos';
+const repo1 = 'sd-01-week4-5-project-todo-list';
+const repo2 = 'sd-01-week4-5-project-meme-generator';
+
+describe('Checks a repository', () => {
+  it('Should has ToDo List project', async () => {
+    expect.assertions(2);
+    const repos = await getRepos(url);
+    expect(repos).toContain(repo1);
+    expect(repos).toContain(repo2);
+  });
+});
