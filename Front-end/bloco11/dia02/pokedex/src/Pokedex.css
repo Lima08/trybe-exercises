@@ -1,0 +1,9 @@
+.Pokemons {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+};
+
+.Pokemons:hover{
+  background-color: grey;
+}

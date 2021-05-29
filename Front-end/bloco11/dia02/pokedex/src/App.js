@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import Pokedex from './Pokedex';
 import data from './data';
 
