@@ -1,17 +1,18 @@
-const Task = (value) => {
-  return (
-    <li>{value}</li>
-  );
-};
+import React from 'react';
+import ListItens from './ListItens';
+
 
 const list = ['Estudar', 'Correr', 'Amar'];
 
-function App() {
-  return (
-    <ol >
-      {list.map(element => Task(element))}
-    </ol>
-  );
+class App extends React.Component {
+  render(){
+    return (
+      <ol>
+        < ListItens value={list}/>
+      </ol>
+    )
+
+  }
 }
 
 export default App;
