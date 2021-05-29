@@ -1,5 +1,5 @@
-import data from './data';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Pokemon extends React.Component {
   render() {
@@ -8,14 +8,24 @@ class Pokemon extends React.Component {
     return (
      <div>
         <div> 
-        <p>{name}</p>
-        <p>{type} </p>
-        <p>{averageWeight.value}{averageWeight.measurementUnit}</p>
+          <p>{name}</p>
+          <p>{type} </p>
+          <p>{averageWeight.value}{averageWeight.measurementUnit}</p>
         </div>
         <img src={image} alt={name}/>
      </div>
     );
   };
+};
+
+Pokemon.propTypes = {
+  name: PropTypes.string,
+  type: PropTypes.string,
+  averageWeight: PropTypes.exact({
+      value: PropTypes.number,
+      measurementUnit: PropTypes.string
+  }),
+  image: PropTypes.string,
 };
 
 export default Pokemon;
