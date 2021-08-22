@@ -63,35 +63,39 @@ ORDER BY district ASC, address_id DESC;
 -- Vamos montar o bolo com todos os ingredientes que vimos hoje
 -- Para os exercícios a seguir, vamos usar a tabela sakila.film
 -- Escreva uma query que exiba todos os filmes cadastrados no banco de dados.
-
+SELECT * FROM film;
 
 
 -- Escreva uma query que exiba apenas o nome dos filmes, seu ano de lançamento e sua classificação .
-
+SELECT title, release_year, rating FROM film;
 
 -- Quantos filmes temos cadastrados?
-
+-- R: 1000
 
 -- Para os exercícios a seguir, vamos usar a tabela sakila.actor
-
+SELECT * FROM actor;
 
 -- Escreva uma query que exiba apenas os sobrenomes únicos cadastrados.
-
+SELECT DISTINCT last_name FROM actor;
 
 -- Quantos sobrenomes únicos temos na tabela?
-
+-- 121
 
 -- Ordene os valores na tabela em ordem crescente de sobrenomes e em ordem decrescente de nome.
-
+SELECT * FROM actor
+ORDER BY last_name ASC, first_name DESC;
 
 -- Vá até a tabela language do sakila e crie uma pesquisa que mostre os 5 idiomas cadastrados , mas não mostre o idioma english .
+SELECT * FROM language
+WHERE name <> 'English';
 
-
--- Vá até a tabela film e selecione todos os dados da tabela. Pronto, fez isso?
-
+-- Vá até a tabela film e selecione todos os dados da tabela.
+SELECT * FROM film;
 
 -- Agora vamos tentar fazer o seguinte: Crie uma query para encontrar os 20 primeiros filmes , incluindo o título , o ano de lançamento , a duração , a classificação indicativa e o custo de substituição . Ordene os resultados pelos filmes com a maior duração e depois pelo menor custo de substituição.
-
+SELECT title, release_year, `length`, rating, replacement_cost FROM  film
+ORDER BY `length` DESC, replacement_cost ASC
+LIMIT 20;
 
 -- -------------------------Exercicios do dia ----------------------------------------------------------
 -- Agora, a prática:
@@ -170,49 +174,71 @@ INSERT INTO Scientists(SSN,Name)
 
 
 -- Escreva uma query para exibir a string "This is SQL Exercise, Practice and Solution".
-
+SELECT 'This is SQL Exercise, Practice and Solution';
 
 -- Escreva uma query para exibir três números em três colunas.
-
+SELECT 1 AS `colun1`, 2 AS `colun2`, 3 AS `colun3`;
 
 -- Escreva uma query para exibir a soma dos números 10 e 15.
-
+SELECT 10 + 15;
 
 -- Escreva uma query para exibir o resultado de uma expressão aritmética qualquer.
-
+SELECT 2 + 5 * 3 + 4;
 
 -- Escreva uma query para exibir todas as informações de todos os cientistas.
-
+SELECT * FROM Scientists;
 
 -- Escreva uma query para exibir o nome como "Nome do Projeto" e as horas como "Tempo de Trabalho" de cada projeto.
-
+SELECT * FROM Projects;
+SELECT Name AS 'Nome do Projeto',
+Hours AS 'Tempo de Trabalho'
+FROM Projects;
 
 -- Escreva uma query para exibir o nome dos cientistas em ordem alfabética.
-
+SELECT * FROM Scientists;
+SELECT Name FROM Scientists
+ORDER BY Name;
 
 -- Escreva uma query para exibir o nome dos Projetos em ordem alfabética descendente.
-
+SELECT * FROM Projects;
+SELECT Name FROM Projects
+ORDER BY Name DESC;
 
 -- Escreva uma query que exiba a string "O projeto Name precisou de Hours horas para ser concluído." para cada projeto.
-
+SELECT CONCAT('O projeto "', Name, '" precisou de ', Hours, ' horas para ser concluído.')
+AS `Tempo De Projeto`
+FROM Projects;
 
 -- Escreva uma query para exibir o nome e as horas dos três projetos com a maior quantidade de horas.
-
+SELECT Name, Hours FROM Projects
+ORDER BY Hours DESC
+LIMIT 3;
 
 -- Escreva uma query para exibir o código de todos os projetos da tabela AssignedTo sem que haja repetições.
-
+SELECT * FROM AssignedTo;
+SELECT DISTINCT Project FROM AssignedTo;
 
 -- Escreva uma query para exibir o nome do projeto com maior quantidade de horas.
+SELECT * FROm Projects;
+SELECT Name FROM Projects
+ORDER BY Hours DESC
+LIMIT 1;
 
 
 -- Escreva uma query para exibir o nome do segundo projeto com menor quantidade de horas.
-
+SELECT Name FROM Projects
+ORDER BY Hours
+LIMIT 1 OFFSET 1;
 
 -- Escreva uma query para exibir todas as informações dos cinco projetos com a menor quantidade de horas.
-
+SELECT * FROM Projects
+ORDER BY Hours
+LIMIT 5;
 
 -- Escreva uma query que exiba a string "Existem Number cientistas na tabela Scientists.", em que Number se refira a quantidade de cientistas.
-
+SELECT CONCAT('Existem ', COUNT(DISTINCT Name), ' cientistas na tabela Scientists.')
+AS `Quantidade de Cientistas na tabela`
+FROM Scientists;
 
 ----------------------------------Bônus------------------------------------------------
 
