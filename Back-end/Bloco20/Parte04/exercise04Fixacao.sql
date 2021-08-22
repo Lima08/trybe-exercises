@@ -13,7 +13,7 @@
 -- ('valor_5','valor_6');
 
 --  Ignorando linhas existentes
-INSERT IGNORE INTO pessoas (id, name) VALUES
+INSERT INTO pessoas (id, name) VALUES
 (4,'Gloria'), -- Sem o IGNORE, essa linha geraria um erro e o INSERT não continuaria.
 (5,'Amanda');
 
@@ -24,21 +24,25 @@ SELECT * FROM pessoas;
 --  O importante aqui é lembrar que o INSERT IGNORE vai pular os outros erros silenciosamente também.
 
 
---  Inserindo valores em colunas com auto_increment
--- Primeiramente, é preciso saber que o auto_increment é uma funcionalidade que todos os bancos de dados possuem. Ela permite que valores sejam gerados automaticamente cada vez que uma nova linha é inserida em uma tabela que tem essa restrição ativa. Ao inserir um novo ator na tabela sakila.actor , caso outros atores ainda não tenham sido inseridos desde que o banco foi restaurado, o próximo valor que será gerado para actor_id será o valor do último id registrado acrescido de um (201 + 1).
+----------Inserindo valores em colunas com auto_increment---------------
+-- Primeiramente, é preciso saber que o auto_increment é uma funcionalidade que todos os bancos de dados possuem.
+-- Ela permite que valores sejam gerados automaticamente cada vez que uma nova linha é inserida em uma tabela que tem essa restrição ativa.
+-- Ao inserir um novo ator na tabela sakila.actor, caso outros atores ainda não tenham sido inseridos desde que o banco foi restaurado, o próximo valor que será gerado para actor_id será o valor do último id registrado acrescido de um (201 + 1).
 
---  INSERT SELECT (Inserindo dados de uma outra tabela)
+-------------------------------------------------------------------
+-----------INSERT SELECT (Inserindo dados de uma outra tabela)------------------
 -- É possível inserir dados a partir de outra tabela usando INSERT INTO SELECT :
--- INSERT INTO tabelaA (coluna1, coluna2)
---     SELECT tabelaB.coluna1, tabelaB.coluna2
---     FROM tabelaB
---     WHERE tabelaB.nome_da_coluna <> 'algumValor'
---     ORDER BY tabelaB.coluna_de_ordenacao;
--- -- Assim, estaríamos extraindo a coluna1 e a coluna2 da tabelaB e as inserindo na tabelaA , de acordo com a condição que for passada no WHERE .
+INSERT INTO tabelaA (coluna1, coluna2)
+    SELECT tabelaB.coluna1, tabelaB.coluna2
+    FROM tabelaB
+    WHERE tabelaB.nome_da_coluna <> 'algumValor'
+    ORDER BY tabelaB.coluna_de_ordenacao;
+
+-- Assim, estaríamos extraindo a coluna1 e a coluna2 da tabelaB e as inserindo na tabelaA , de acordo com a condição que for passada no WHERE .
 -- É possível usar também SELECT * FROM e copiar todos os dados de todas as colunas de uma tabela para outra, mas nessa situação a tabelaA e a tabelaB precisam obrigatoriamente possuir a mesma quantidade de colunas, e os tipos de dados das colunas correspondentes devem ser iguais.
 -- Com essa funcionalidade, é fácil criar tabelas temporárias para testes ou por necessidade. Por exemplo, para trazer os dados da tabela sakila.staff para a tabela sakila.actor , poderíamos fazer:
 
-SELECT * FROm sakila.actor;
+SELECT * FROM sakila.actor;
 
 INSERT INTO sakila.actor (first_name, last_name)
     SELECT first_name, last_name FROM sakila.staff;
@@ -50,6 +54,10 @@ ORDER BY last_update;
 
 -- Fixação --
 -- Insira um novo funcionário na tabela sakila.staff .
+Use sakila;
+SELECT * FROM sakila.staff;
+INSERT TO 
+
 
 -- Para saber quais campos são obrigatórios, clique com o botão direito na tabela sakila.staff e selecione "Table Inspector". 
 
