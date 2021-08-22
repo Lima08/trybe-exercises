@@ -56,14 +56,19 @@ ORDER BY last_update;
 -- Insira um novo funcionário na tabela sakila.staff .
 Use sakila;
 SELECT * FROM sakila.staff;
-INSERT TO 
+INSERT IGNORE INTO sakila.staff
+(first_name, last_name, address_id, email, store_id, active, username, `password`)
+VALUES
+('Joao', 'Lima', 1, 'jaoo.lima@gmail.com', 2, 1, 'LimaLima', 'SenhaSegura123');
 
-
+INSERT INTO `sakila`.`staff`
+    (first_name, last_name, address_id, email, store_id, active, username, password)
+VALUES
+    ('Geralt', 'of Rivia', 2, 'tossacoin@gmail.com', 1, 1, 'geralt', 'theWhiteWolf');
 -- Para saber quais campos são obrigatórios, clique com o botão direito na tabela sakila.staff e selecione "Table Inspector". 
+-- No WorkBench clicando na aba "columns" é possivel verificar quais campos aceitam nulos. Lembre-se de que valores que são gerados automaticamente não precisam ser inseridos manualmente.
 
-
--- Clique na aba "columns" e verifique quais campos aceitam nulos para te guiar. Lembre-se de que valores que são gerados automaticamente não precisam ser inseridos manualmente. Boa explorada!
-
+SELECT * FROM sakila.staff;
 
 -- Feito o exercício anterior, vamos agora para o nível 2. Insira dois funcionários novos em apenas uma query .
 
