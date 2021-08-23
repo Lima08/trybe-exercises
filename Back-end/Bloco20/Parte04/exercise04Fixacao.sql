@@ -155,10 +155,12 @@ ORDER BY last_update
 LIMIT 2;
 
 -- Essas são as maneiras mais comuns de utilizar o UPDATE no dia a dia.
+-- Para saber sobreo modo --safe-updates consultar o curso bloco 20 parte 4 Pagian sobre UPDATE
 
--- PAra saber sobreo modo --safe-updates consultar o curso bloco 20 parte 4 Pagian sobre UPDATE
 
----------------Desafios UPDATE -----------------------------
+
+------------------------------------------------------------------------------
+---------------------Desafios UPDATE -----------------------------------------
 -- Como o banco pode ser deletado e recriado infinitamente, vamos desabilitar o --safe-updates nos exercícios. Além disso, esse modo pode ser habilitado novamente quando necessário. Rode o seguinte comando em uma janela de query dentro do MySQL Workbench sempre que abri-lo para desabilitar essa funcionalidade, antes de executar seus comandos UPDATE ou DELETE :
 SET SQL_SAFE_UPDATES = 0;
 
@@ -172,6 +174,46 @@ SET SQL_SAFE_UPDATES = 0;
 
 
 -- Foi determinado pelo setor financeiro que haverá um reajuste em todos os preços dos filmes, com base em sua duração. Para todos os filmes com duração entre 0 e 100, o valor do aluguel passará a ser $10,00, e o aluguel dos filmes com duração acima de 100 passará a ser de $20,00.
+
+
+
+
+---------------------------------------------------------------------------------------
+--------------------Excluindo dados de uma tabela--------------------------------------
+-- Para excluir dados de forma básica, temos a seguinte sintaxe:
+DELETE FROM banco_de_dados.tabela
+WHERE coluna = 'valor';
+
+-- O WHERE é opcional. Porém, sem ele, todas as linhas da tabela seriam excluídas.
+-- Exemplo no banco sakila :
+DELETE FROM sakila.film_text
+WHERE title = 'ACADEMY DINOSAUR';
+
+-- P.S. Novamente, caso o modo --safe-updates esteja habilitado, o comando DELETE só funcionaria se os IDs fossem incluídos em suas queries . Para fins de prática, vamos desabilitá-lo. Rode o seguinte comando em uma janela de query , dentro do MySQL Workbench, sempre que abri-lo, para desabilitar essa funcionalidade antes de executar seus comandos DELETE :
+SET SQL_SAFE_UPDATES = 0;
+
+
+
+---------------------------------------------------------------------------------------
+--------------------------Vamos praticar o DELETE--------------------------------------
+-- Exclua do banco de dados o ator com o nome de "KARL".
+
+
+-- Exclua do banco de dados os atores com o nome de "MATTHEW".
+
+
+-- Exclua da tabela film_text todos os registros que possuem a palavra "saga" em suas descrições.
+
+
+-- Apague da maneira mais performática possível todos os registros das tabelas film_actor e film_category.
+
+
+-- Inspecione todas as tabelas do banco de dados sakila e analise quais restrições ON DELETE foram impostas em cada uma. Use o Table Inspector para fazer isso (aba DDL).
+
+
+-- Exclua o banco de dados e o recrie (use as instruções no início desta aula).
+
+
 
 
 
