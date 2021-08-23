@@ -54,32 +54,53 @@ ORDER BY last_update;
 
 -- Fixação --
 -- Insira um novo funcionário na tabela sakila.staff .
+-- Para saber quais campos são obrigatórios, clique com o botão direito na tabela sakila.staff e selecione "Table Inspector". 
+-- No WorkBench clicando na aba "columns" é possivel verificar quais campos aceitam nulos. Lembre-se de que valores que são gerados automaticamente não precisam ser inseridos manualmente.
 Use sakila;
 SELECT * FROM sakila.staff;
-INSERT IGNORE INTO sakila.staff
+INSERT INTO sakila.staff
 (first_name, last_name, address_id, email, store_id, active, username, `password`)
 VALUES
 ('Joao', 'Lima', 1, 'jaoo.lima@gmail.com', 2, 1, 'LimaLima', 'SenhaSegura123');
 
-INSERT INTO `sakila`.`staff`
-    (first_name, last_name, address_id, email, store_id, active, username, password)
-VALUES
-    ('Geralt', 'of Rivia', 2, 'tossacoin@gmail.com', 1, 1, 'geralt', 'theWhiteWolf');
--- Para saber quais campos são obrigatórios, clique com o botão direito na tabela sakila.staff e selecione "Table Inspector". 
--- No WorkBench clicando na aba "columns" é possivel verificar quais campos aceitam nulos. Lembre-se de que valores que são gerados automaticamente não precisam ser inseridos manualmente.
-
-SELECT * FROM sakila.staff;
 
 -- Feito o exercício anterior, vamos agora para o nível 2. Insira dois funcionários novos em apenas uma query .
-
+INSERT IGNORE INTO sakila.staff
+(first_name, last_name, address_id, email, store_id, active, username, `password`)
+VALUES
+   ('Jeff', 'Bezos', 2, 'jeffbezos@gmail.com', 1, 1, 'jeffb', 'ImTheChamp'),
+    ('Sekiro', 'Okami', 2, 'sekirowolf@gmail.com', 1, 1, 'okami', 'SekiroTheSamurai');
 
 -- Selecione os cinco primeiros nomes e sobrenomes da tabela sakila.customer e cadastre essas pessoas como atores na tabela sakila.actor .
+SELECT * FROM sakila.customer;
+SELECT * FROM sakila.actor;
+SELECT * FROM sakila.customer
+ORDER BY customer_id
+LIMIT 5;
+
+INSERT INTO sakila.actor (first_name, last_name)
+SELECT first_name, last_name FROM sakila.customer
+ORDER BY customer_id
+LIMIT 5;
 
 
--- Cadastre três categorias de uma vez só na tabela sakila.category .
+-- Cadastre três categorias de uma vez só na tabela sakila.category .;sakila.
+SELECT * FROM sakila.category;
+INSERT INTO sakila.category
+(`name`)
+VALUES ('Lima'),
+('Paulo'),
+('Gomes');
 
 
 -- Cadastre uma nova loja na tabela sakila.store .
+SELECT * FROM sakila.store;
+INSERT INTO sakila.store
+(manager_staff_id, address_id)
+VALUES
+(6, 5);
+
+
 
 --------------------------------------------------------
 ------ O UPDATE te permite alterar valores de uma tabela com base em alguma condição. ---
