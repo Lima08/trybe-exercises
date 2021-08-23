@@ -126,8 +126,9 @@ WHERE staff_id = 4;
 -- Opção 1 - Incluindo a lista de condições fixas
 UPDATE sakila.actor
 SET first_name = 'JOE'
-WHERE actor_id IN (1,2,3);
+WHERE actor_id IN (4, 5);
 
+SELECT first_name FROM sakila.actor;
 -- -- Opção 2 - Especificando como cada entrada será alterada individualmente
 UPDATE sakila.actor
 SET first_name = (
@@ -154,6 +155,7 @@ WHERE active = 1
 ORDER BY last_update
 LIMIT 2;
 
+SELECT * FROm sakila.staff;
 -- Essas são as maneiras mais comuns de utilizar o UPDATE no dia a dia.
 -- Para saber sobreo modo --safe-updates consultar o curso bloco 20 parte 4 Pagian sobre UPDATE
 
@@ -165,15 +167,55 @@ LIMIT 2;
 SET SQL_SAFE_UPDATES = 0;
 
 -- Atualize o primeiro nome de todas as pessoas da tabela sakila.actor que possuem o primeiro nome "JULIA" para "JULES".
+UPDATE sakila.actor
+SET first_name = 'JULES'
+WHERE first_name = 'JULIA';
 
+-- SELECT * FROM sakila.actor
+-- WHERE first_name = 'JULES'
+-- OR first_name = 'JULIA';
 
 -- Foi exigido que a categoria "Sci-Fi" seja alterada para "Science Fiction".
+-- SELECT * FROM sakila.category ;
+-- SELECT * FROM sakila.category 
+-- WHERE `name` LIKE 'Sci-Fi' OR `name` LIKE 'Science Fiction';
+UPDATE sakila.category
+SET `name` = 'Science Fiction'
+WHERE `name` LIKE 'Sci-Fi';
 
 
 -- Atualize o valor do aluguel para $25 de todos os filmes com duração maior que 100 minutos e que possuem a classificações "G" , "PG" ou "PG-13" e um custo de substituição maior que $20.
+SELECT * FROM sakila.film;
+SELECT * FROM sakila.film
+;
+UPDATE sakila.film
+SET rental_rate = 25.00
+WHERE `length` > 100
+AND (rating = 'G'
+OR rating = 'PG'
+OR rating = 'PG-13')
+AND replacement_cost > 20.00;
+
+SELECT * FROM sakila.film
+WHERE `length` > 100
+AND (rating = 'G'
+OR rating = 'PG'
+OR rating = 'PG-13')
+AND replacement_cost > 20.00;
 
 
 -- Foi determinado pelo setor financeiro que haverá um reajuste em todos os preços dos filmes, com base em sua duração. Para todos os filmes com duração entre 0 e 100, o valor do aluguel passará a ser $10,00, e o aluguel dos filmes com duração acima de 100 passará a ser de $20,00.
+SELECT * FROM sakila.film;
+SELECT * FROM sakila.film
+WHRE `length` BETWEEN 0 AND 100;
+
+UPDATE sakila.film
+SET rental_rate = 10.00
+WHRE `length` BETWEEN 0 AND 100
+AND
+SET rental_rate = 20.00
+WHRE `length` > 100;
+
 
 
 
