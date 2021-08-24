@@ -198,27 +198,20 @@ AND replacement_cost > 20.00;
 
 SELECT * FROM sakila.film
 WHERE `length` > 100
-AND (rating = 'G'
-OR rating = 'PG'
-OR rating = 'PG-13')
+AND (rating = 'G' OR rating = 'PG' OR rating = 'PG-13')
 AND replacement_cost > 20.00;
 
 
 -- Foi determinado pelo setor financeiro que haverá um reajuste em todos os preços dos filmes, com base em sua duração. Para todos os filmes com duração entre 0 e 100, o valor do aluguel passará a ser $10,00, e o aluguel dos filmes com duração acima de 100 passará a ser de $20,00.
 SELECT * FROM sakila.film;
-SELECT * FROM sakila.film
-WHRE `length` BETWEEN 0 AND 100;
 
 UPDATE sakila.film
-SET rental_rate = 10.00
-WHRE `length` BETWEEN 0 AND 100
-AND
-SET rental_rate = 20.00
-WHRE `length` > 100;
-
-
-
-
+SET rental_rate = (
+    CASE
+        WHEN `length` BETWEEN 1 AND 100 THEN 10
+        WHEN `length` > 100 THEN 20
+    END
+);
 
 ---------------------------------------------------------------------------------------
 --------------------Excluindo dados de uma tabela--------------------------------------
@@ -228,6 +221,7 @@ WHERE coluna = 'valor';
 
 -- O WHERE é opcional. Porém, sem ele, todas as linhas da tabela seriam excluídas.
 -- Exemplo no banco sakila :
+SELECT * FROM sakila.film_text;
 DELETE FROM sakila.film_text
 WHERE title = 'ACADEMY DINOSAUR';
 
@@ -239,11 +233,17 @@ SET SQL_SAFE_UPDATES = 0;
 ---------------------------------------------------------------------------------------
 --------------------------Vamos praticar o DELETE--------------------------------------
 -- Exclua do banco de dados o ator com o nome de "KARL".
+SELECT * FROM sakila.actor;
+SELECT actor_id
+FROM sakila.actor
+WHERE first_name = 'KARL';
+DELETE FROM sakila.actor
+WHERE actor_id = 12;
+DELETE FROM sakila.actor
+WHERE first_name = 'KARL';
 
 
 -- Exclua do banco de dados os atores com o nome de "MATTHEW".
-
-
 -- Exclua da tabela film_text todos os registros que possuem a palavra "saga" em suas descrições.
 
 
