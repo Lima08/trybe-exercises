@@ -313,18 +313,40 @@ WHERE NOT EXISTS (
 ------------------------------------------ Vamos Praticar um pouco mais sobre o exists------------------------------------------------------
 -- Use o banco de dados hotel para realizar os desafios a seguir:
 -- Usando o EXISTS na tabela books_lent e books , exiba o id e título dos livros que ainda não foram emprestados.
-
-
-
+SELECT * FROM hotel.Books;
+SELECT * FROM hotel.Books_Lent;
+SELECT title, id
+FROM hotel.Books AS b
+WHERE NOT EXISTS (
+    SELECT * FROM hotel.Books_Lent
+    WHERE b.id = book_id
+);
 -- Usando o EXISTS na tabela books_lent e books , exiba o id e título dos livros estão atualmente emprestados e que contêm a palavra "lost" no título.
-
+SELECT * FROM hotel.Books_Lent;
+SELECT title, id FROM hotel.Books AS b
+WHERE EXISTS (
+    SELECT * FROM  hotel.Books_Lent AS bl
+    WHERE b.id = book_id AND returned = 0 AND b.title LIKE '%lost%' );
 
 
 -- Usando a tabela carsales e customers , exiba apenas o nome dos clientes que ainda não compraram um carro.
-
+SELECT * FROM hotel.CarSales;
+SELECT * FROM hotel.Customers;
+SELECT `Name` FROM hotel.Customers AS c
+WHERE NOT EXISTS (
+    SELECT * FROM hotel.CarSales as cs
+    WHERE c.CustomerId = cs.CustomerId
+);
 
 
 -- Usando o comando EXISTS em conjunto com JOIN e as tabelas cars , customers e carsales , exiba o nome do cliente e o modelo do carro de todos os clientes que fizeram compras de carros.
-
-
-
+SELECT * FROM hotel.CarSales;
+SELECT * FROM hotel.Cars;
+SELECT * FROM hotel.Customers;
+SELECT cus.`Name` AS Cliente, cars.`Name`
+FROM hotel.Customers AS cus
+INNER JOIN hotel.Cars AS cars
+WHERE EXISTS (
+    SELECT * FROM hotel.CarSales AS cs
+    WHERE cus.CustomerId = cs.CustomerID AND cs.carID = cars.Id
+) ;
