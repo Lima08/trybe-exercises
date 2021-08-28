@@ -110,19 +110,221 @@ ORDER BY c.first_name DESC;
 
 
 -- Monte uma query que exiba o nome , sobrenome e a média de valor ( amount ) paga aos funcionários no ano de 2006. Use as tabelas payment e staff . Os resultados devem estar agrupados pelo nome e sobrenome do funcionário.
--- SELECT * FROM sakila.customer;
--- SELECT * FROM sakila.address;
-
-
+SELECT * FROM sakila.payment;
+SELECT * FROM sakila.staff;
+SELECT s.first_name, s.last_name, ROUND(AVG(p.amount), 2) AS `Média de pagamentos`
+FROM sakila.staff AS s
+INNER JOIN sakila.payment AS p
+ON s.staff_id = p.staff_id
+WHERE YEAR(p.payment_date) = 2006
+GROUP BY s.first_name, s.last_name;
 
 
 -- Monte uma query que exiba o id do ator , nome , id do filme e título do filme , usando as tabelas actor , film_actor e film . Dica: você precisará fazer mais de um JOIN na mesma query .
--- SELECT * FROM sakila.customer;
--- SELECT * FROM sakila.address;
+SELECT * FROM sakila.actor;
+SELECT * FROM sakila.film_actor;
+SELECT * FROM sakila.film;
+SELECT a.actor_id, a.first_name, f.film_id, f.title
+FROM sakila.actor AS a
+INNER JOIN sakila.film_actor AS af
+ON a.actor_id = af.actor_id
+INNER JOIN sakila.film AS f
+ON af.film_id = f.film_id ;
 
+--  TBM PODEMOS FAZER ASSIM:
+-- SELECT a.first_name, f.title
+-- FROM sakila.actor AS a
+-- INNER JOIN sakila.film_actor AS af
+-- ON a.actor_id = af.actor_id
+-- INNER JOIN sakila.film AS f
+-- ON af.film_id = f.film_id ;
 
+--------------------------------------------------------------------------------------------------------------
+-------------- Como utilizar o LEFT JOIN e o RIGHT JOIN -------------------------------------
 -- Até o momento, temos produzido resultados apenas quando temos valores correspondentes em ambas as colunas de referência. Porém, o que devemos fazer quando possivelmente apenas uma das tabelas possui um valor correspondente existente? É possível que você tenha que usar o LEFT JOIN ou RIGHT JOIN nessas situações.
--- SELECT * FROM sakila.customer;
--- SELECT * FROM sakila.address;
+
+-- O conceito é o mesmo. A direfença é que conforme a posição das tabelas no SELECT a prioridade de trazer os valores é dada pelo comando LEFT e RIGHT
+-- LEFT JOIN
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    a.actor_id,
+    a.first_name,
+    a.last_name
+FROM customer AS c
+LEFT JOIN actor AS a
+ON c.last_name = a.last_name
+ORDER BY c.last_name;
+
+
+-- RIGHT JOIN
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    a.actor_id,
+    a.first_name,
+    a.last_name
+FROM customer AS c
+RIGHT JOIN actor AS a
+ON c.last_name = a.last_name
+ORDER BY c.last_name;
+
+
+---------------------------- O que é SELF JOIN e quando utilizá-lo  ------------------------------------
+-- Até o momento, temos usado mais de uma tabela para analisar dados e gerar informação. No entanto, a informação a ser analisada pode estar concentrada em apenas uma tabela. Nesse cenário, o SELF JOIN pode ser usado para criar resultados relevantes.
+-- BAsicamente comparamos a tabela com ela mesmo dando dois apelidos para ela.
+
+-- EX:
+SELECT t1.title, t1.replacement_cost, t2.title, t2.replacement_cost
+FROM sakila.film AS t1, sakila.film AS t2
+WHERE t1.length = t2.length;
+
+-- Para fixar esses conceitos, tente encontrar as seguintes informações:
+-- Queremos saber os ids e custos de substituição dos filmes que possuem o mesmo custo de substituição.
+SELECT s1.film_id, s1.replacement_cost, s2.film_id, s2.replacement_cost
+FROM sakila.film AS s1, sakila.film AS s2
+WHERE s1.replacement_cost = s2.replacement_cost;
+-- Não ficou claro para mim --
+
+-- Exiba o título e a duração de empréstimo dos filmes que possuem a mesma duração. Exiba apenas os filmes com a duração de empréstimo entre 2 e 4 dias.
+SELECT * FROM sakila.film;
+SELECT f1.title, f1.rental_duration, f2.title, f2.rental_duration
+FROM sakila.film AS f1, sakila.film AS f2
+WHERE f1.rental_duration = f2.rental_duration
+HAVING f1.rental_duration BETWEEN 2 AND 4;
+
+---------------------------------------------------------------------------
+----------------------Como unir resultados com o UNION e o UNION ALL------------------------------
+--  O Union junta as informações passadas em select de duas tabelas diferentes em uma. A quantidade de colunas deve ser a masma mara as duas tabelas.
+-- Imagine que temos duas tabelas, morning_events e night_events , e que essas tabelas possuem os nomes das pessoas que compareceram a esses dois tipos diferentes de eventos. Porém, queremos uma lista agregada de todas as pessoas que estão cadastradas, independente do tipo de evento a que compareceram.
+-- Essa situação é um dos cenários que podem ser resolvidos através do UNION . O UNION nos permite unir os registros de uma tabela com outra, desde que usemos a mesma quantidade de colunas. Se voce quiser fazer a uniam de tabelas com quantidade de colunas diferentes podemos colocar uma coluna falça a mais.
+--   Com o comando UNION ALL as duas tabelas são mescladas totalmente, mesmo que tenha valores repetidos. Se colocar apenas UNION não repete valores.
+
+
+---------------------------- EX:
+-- Todos os funcionários foram promovidos a atores. Monte uma query que exiba a união da tabela staff com a tabela actor , exibindo apenas o nome e o sobrenome . Seu resultado não deve excluir nenhum funcionário ao unir as tabelas.
+
+
+
+
+-- Monte uma query que una os resultados das tabelas customer e actor , exibindo os nomes que contêm a palavra "tracy" na tabela customer e os que contêm "je" na tabela actor . Exiba apenas os resultados únicos.
+
+
+
+
+-- Monte uma query que exiba a união dos cinco últimos nomes da tabela actor , o primeiro nome da tabela staff e cinco nomes a partir da 15ª posição da tabela customer . Não permita que dados repetidos sejam exibidos. Ordene os resultados em ordem alfabética.
+
+
+
+
+-- Você quer exibir uma lista paginada com os nomes e sobrenomes de todos os clientes e atores do banco de dados, em ordem alfabética. Considere que a paginação está sendo feita de 15 em 15 resultados e que você está na 4ª página. Monte uma query que simule esse cenário.
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+----------------------------------------------------Como utilizar uma SUBQUERY-----------------------------------
+-- Uma SUBQUERY é uma query aninhada que é avaliada dentro de um par de parênteses. Ela pode conter expressões simples, como adições e subtrações, mas não se limita a isso, uma vez que podemos utilizar praticamente todos os comandos já vistos até o momento dentro de uma SUBQUERY .
+-- Algo a se lembrar é que a subquery não é a única maneira de encontrar resultados de tabelas relacionadas. Quando se trata de SQL, os JOINs podem ser usados para encontrar os mesmos resultados.
+-- É recomendado tomar a decisão sobre qual opção utilizar (subquery ou JOIN ) baseando-se na performance da sua query.
+
+
+---------------- Diferentes maneiras de utilizar uma SUBQUERY --------------------------------------------
+-- Usando uma SUBQUERY como fonte de dados para o FROM .
+SELECT f.title, f.rating
+FROM (
+    SELECT *
+    FROM sakila.film
+    WHERE rating = 'R'
+) AS f;
+
+-- Preenchendo uma coluna de um SELECT por meio de uma SUBQUERY .
+SELECT
+    address,
+    district,
+    (
+        SELECT city
+        FROM sakila.city
+        WHERE city.city_id = sakila.address.city_id
+    ) AS city
+FROM sakila.address;
+
+-- Filtrando resultados com WHERE usando como base os dados retornados de uma SUBQUERY .
+SELECT address, district
+FROM sakila.address
+WHERE city_id in (
+    SELECT city_id
+    FROM sakila.city
+    WHERE city in ('Sasebo', 'San Bernardino', 'Athenai', 'Myingyan')
+);
+
+
+-- Usando uma tabela externa, de fora da SUBQUERY , dentro dela.
+SELECT
+    first_name,
+    (
+        SELECT address
+        FROM sakila.address
+        WHERE address.address_id = tabela_externa.address_id
+    ) AS address
+FROM sakila.customer AS tabela_externa;
+
+-- SUBQUERY ou JOIN
+-- Talvez você esteja se perguntando se seria possível resolver as queries anteriores através de um JOIN . De fato, podemos, como é exemplificado a seguir.
+
+-- Usando SUBQUERY ------------
+SELECT
+    first_name,
+    (
+        SELECT address
+        FROM sakila.address
+        WHERE address.address_id = tabela_externa.address_id
+    ) AS address
+FROM sakila.customer AS tabela_externa;
+
+-- Usando INNER JOIN ---------
+SELECT c.first_name, ad.address
+FROM sakila.customer c
+INNER JOIN sakila.address ad ON c.address_id = ad.address_id;
+-- Sabendo disso, como decidir entre as duas abordagens? Decida qual usar através de testes de performance e, em seguida, por afinidade.
+
+
+-----------------------------------------------------------------------------------------------------------------
+------------------- Criando queries mais dinâmicas através do EXISTS----------------------------------------------
+--  Com EXISTS podemos fazeer uma filtragem de valores condicionados a existencia de alguma informação no banco de dados.
+-- EX:
+SELECT * FRAOM praticando.manufacturers AS m
+WHERE EXISTS (
+  SELECT * FROM praticando.poducts
+  WHERE manufacturer = m.code
+);
+
+--  Podemo tbm utilizar o comando NOT para fazer anegação. EX:
+SELECT * FRAOM praticando.manufacturers AS m
+WHERE NOT EXISTS (
+  SELECT * FROM praticando.poducts
+  WHERE manufacturer = m.code
+);
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------ Vamos Praticar um pouco mais sobre o exists------------------------------------------------------
+-- Use o banco de dados hotel para realizar os desafios a seguir:
+-- Usando o EXISTS na tabela books_lent e books , exiba o id e título dos livros que ainda não foram emprestados.
+
+
+
+-- Usando o EXISTS na tabela books_lent e books , exiba o id e título dos livros estão atualmente emprestados e que contêm a palavra "lost" no título.
+
+
+
+-- Usando a tabela carsales e customers , exiba apenas o nome dos clientes que ainda não compraram um carro.
+
+
+
+-- Usando o comando EXISTS em conjunto com JOIN e as tabelas cars , customers e carsales , exiba o nome do cliente e o modelo do carro de todos os clientes que fizeram compras de carros.
+
 
 
