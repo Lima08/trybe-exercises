@@ -205,27 +205,50 @@ HAVING f1.rental_duration BETWEEN 2 AND 4;
 
 ---------------------------- EX:
 -- Todos os funcionários foram promovidos a atores. Monte uma query que exiba a união da tabela staff com a tabela actor , exibindo apenas o nome e o sobrenome . Seu resultado não deve excluir nenhum funcionário ao unir as tabelas.
-
-
+SELECT * FROM sakila.staff;
+SELECT * FROM sakila.actor;
+SELECT first_name, last_name FROM sakila.actor
+UNION ALL
+SELECT first_name, last_name FROM sakila.staff;
 
 
 -- Monte uma query que una os resultados das tabelas customer e actor , exibindo os nomes que contêm a palavra "tracy" na tabela customer e os que contêm "je" na tabela actor . Exiba apenas os resultados únicos.
-
-
+SELECT * FROM sakila.customer;
+SELECT * FROM sakila.actor;
+SELECT first_name FROM sakila.actor
+WHERE first_name LIKE '%je%'
+UNION
+SELECT first_name FROM sakila.customer
+WHERE first_name LIKE '%tracy%';
 
 
 -- Monte uma query que exiba a união dos cinco últimos nomes da tabela actor , o primeiro nome da tabela staff e cinco nomes a partir da 15ª posição da tabela customer . Não permita que dados repetidos sejam exibidos. Ordene os resultados em ordem alfabética.
+SELECT * FROM sakila.staff;
+SELECT * FROM sakila.actor;
+SELECT * FROM sakila.customer;
 
-
+(SELECT first_name FROM sakila.actor ORDER BY actor_id DESC LIMIT 5)
+UNION
+(SELECT first_name FROM sakila.staff LIMIT 1)
+UNION
+(SELECT first_name FROM sakila.customer LIMIT 5 OFFSET 15)
+ORDER BY first_name;
 
 
 -- Você quer exibir uma lista paginada com os nomes e sobrenomes de todos os clientes e atores do banco de dados, em ordem alfabética. Considere que a paginação está sendo feita de 15 em 15 resultados e que você está na 4ª página. Monte uma query que simule esse cenário.
+SELECT * FROM sakila.customer;
+SELECT * FROM sakila.actor;
+(SELECT first_name, last_name FROM sakila.customer
+ORDER BY first_name , last_name LIMIT 60)
+UNION
+(SELECT first_name, last_name FROM sakila.actor
+ORDER BY first_name , last_name LIMIT 60)
+ORDER BY first_name, last_name
+LIMIT 15 OFFSET 45;
 
 
-
-
-------------------------------------------------------------------------------------------------------------
-----------------------------------------------------Como utilizar uma SUBQUERY-----------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------Como utilizar uma SUBQUERY----------------------------------------------------------------------------------
 -- Uma SUBQUERY é uma query aninhada que é avaliada dentro de um par de parênteses. Ela pode conter expressões simples, como adições e subtrações, mas não se limita a isso, uma vez que podemos utilizar praticamente todos os comandos já vistos até o momento dentro de uma SUBQUERY .
 -- Algo a se lembrar é que a subquery não é a única maneira de encontrar resultados de tabelas relacionadas. Quando se trata de SQL, os JOINs podem ser usados para encontrar os mesmos resultados.
 -- É recomendado tomar a decisão sobre qual opção utilizar (subquery ou JOIN ) baseando-se na performance da sua query.
