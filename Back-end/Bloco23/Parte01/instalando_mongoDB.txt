@@ -1,0 +1,97 @@
+Para ver a versão atual do sistema operacional linux:
+ - hostnamectl
+
+Comando para instalação mongoDB:
+- curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+-  sudo apt-get update
+- sudo apt-get install -y mongodb-org
+
+Checando se deu certo:
+-  sudo service mongod start
+-  sudo service mongod status
+
+Parando a instância:
+- sudo service mongod stop
+
+Reiniciando a instância:
+- sudo service mongod restart
+
+Configurando a inicialização do servidor do MongoDB
+
+Por padrão, após a instalação, seu servidor vai estar configurado para não iniciar junto ao sistema. Caso queira ativar o início automático quando ligar o computador, utilize o comando:
+- sudo systemctl enable mongod.service
+
+Caso não queira mais que isso aconteça (para poupar memória RAM, por exemplo), você pode desativar o início automático utilizando o comando:
+- sudo systemctl disable mongod.service
+
+Na primeira vez que for utilizar o MongoDB após ligar o computador, será necessário iniciar o servidor com o comando:
+- sudo service mongod start
+
+
+-------------------------------------------------------------------------------
+Desinstalando o MongoDB:
+#Caso sua instalação tenha retornado algum problema, siga os passos abaixo para desinstalar e tente realizar a instalação novamente.
+
+Pare sua instância do mongodb:
+sudo service mongod stop
+
+Primeiro, remova todos os pacotes instalados:
+sudo apt-get purge mongodb-org*
+
+#Agora, remova os arquivos de dependências que não são mais necessários. Em seguida, remova as versões antigas dos arquivos de pacotes.
+sudo apt-get autoremove
+sudo apt-get autoclean
+
+#Após isso, remova os arquivos do mongodb que podem ter ficado para trás.
+sudo rm -rf /var/log/mongodb
+sudo rm -rf /var/lib/mongodb
+
+#Se a desinstalação for concluída com sucesso, o comando mongod --version não deve retornar a versão do seu mongodb.
+
+### Conectando ao mongo ####
+Comandos:
+- mongo
+- show dbs
+- exit
+#Para acessar em outra porta (A padrão é 27017) usar o comando:
+- mongo --port 19000 # Essa porta é um exemplo
+
+-------------------------------------------------------------------------------
+Uma vez conectado à uma instância do MongoDB através do MongoDB Shell , você só precisa especificar o contexto em que essa escrita acontecerá. Nesse caso, o contexto é o nome do banco de dados que você quer criar:
+- use nomeDoBanco
+- db.nomeDaColecao.insertOne( { x: 1 })
+
+#Criando uma coleção
+#Como você viu, se uma coleção não existe, o MongoDB cria essa coleção no momento do primeiro insert .
+db.nomeDaColecao1.insertOne({ x: 1 })
+db.nomeDaColecao2.createIndex({ y: 1 })
+
+# Exemplo de um Documento NoSQL
+{
+    "_id": 1,
+    "nome": "Jose",
+    "endereco": {
+        "logradouro": "Rua 1",
+        "regiao": "Zona Norte",
+        "cidade": "São Paulo",
+        "uf": "SP"
+    }
+},
+{
+    "_id": 2,
+    "nome": "Maria",
+    "endereco": {
+        "logradouro": "Rua 2",
+        "cidade": "Belo Horizonte",
+        "uf": "MG"
+    }
+}
+
+# A foto nessa pasta é a representação gráfica do comando anterior.
+
+
+
+Outro shell: 
+Precisa instalar o mongo shell
+PAra corar usar o codigo:
+- mongosh
