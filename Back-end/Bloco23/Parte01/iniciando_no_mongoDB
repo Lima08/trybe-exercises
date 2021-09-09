@@ -95,3 +95,52 @@ Outro shell:
 Precisa instalar o mongo shell
 PAra corar usar o codigo:
 - mongosh
+
+
+----------------------------------------------------
+Utilizando o insertOne()
+
+Para criar / ausar um banco de dados utilizamos o comando:
+- use nomeBancoDados
+
+Para criar uma collection (Tabela):
+- bd.nomeColectionsDados.insertOne()
+
+Com o comando db ele mosrta qual esta em uso.
+
+
+Nesse comando db significa o banco q estamos utilizando. 
+A resposta de sucesso disso será algo como:
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("613a59cff0d56b2c5c659381")
+}
+
+
+---------------------------------
+Utilizando o find()
+
+Muito parecido com os outros comandos. Esse comando tras todos os dados da colection em questão. Ex:
+ db.carros.find()
+
+ Retorno será algo amis ou menos assim:
+{ "_id" : ObjectId("613a59cff0d56b2c5c659381"), "noma" : "Fusca", "preco" : 2000 }
+
+-----------------------------------------------
+-----insertMany()----------
+PAra utilizar esse comando colocamos tudo dentro de um array:
+db.nomeColection.insertMany([
+    { "productName": "Lapis", "stock": 10, "price": 20,"status":"A"},
+    { "productName": "Tesoura", "price": 5, "status": "B" },
+    { "productName": "Borracha", "price": 15, "status": "A" }
+])
+
+## OBS: É CASE SENSITIVE ##
+Caso a gravação pare por algum erro podemos colocar um segundo parametro (depois do array) que se chama orderned. Com ele o db grava de forma independente de erros. fora de ordem. EX:
+db.nomeColection.insertMany([
+    { "productName": "Lapis", "stock": 10, "price": 20,"status":"A"},
+    { "productName": "Tesoura", "price": 5, "status": "B" },
+    { "productName": "Borracha", "price": 15, "status": "A" }
+], {ordered: false});
+
+## OBS: O ; é opcional ##
