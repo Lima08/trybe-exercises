@@ -144,3 +144,8 @@ db.nomeColection.insertMany([
 ], {ordered: false});
 
 ## OBS: O ; é opcional ##
+
+
+//  UTILIZANDO O mongoimport
+mongoimport --db class --collection books "./books.json"
+//  Precisa estar fora do mongo. Class fica sendo o nome do banco de dados. books o nome da coleção e entre "" o caminho do arquivo.
