@@ -64,34 +64,32 @@ db.restaurants.insertMany([
 
 
     // Exercicios  ------------------------------
-// Copie todo o conteúdo do link e depois abra o MongoDB Shell ;
-// Utilize o comando use business para criar e utilizar este banco de dados;
-// Cole todo o conteúdo no terminal do MongoDB Shell e confirme com ENTER ou baixe o arquivo e o execute usando o comando mongo exercise-filter-operators.js .
-// Para confirmar que está tudo funcionando, rode o seguinte comando:
-  db.restaurants.count()
-// O valor retornado deve ser 60 , que é a quantidade de documentos nesta coleção. Agora utilize os operadores de comparação para resolver os desafios de 1 a 5.
+// 60 é a quantidade de documentos nesta coleção. Agora utilize os operadores de comparação para resolver os desafios de 1 a 5.
 // Selecione e faça a contagem dos restaurantes presentes nos bairros Queens , Staten Island e Bronx . (utilizando o atributo borough )
-
-
+db.restaurants.find({borough: {$in:["Queens", "Staten Island", "Bronx"]}}).count()
 
 // Selecione e faça a contagem dos restaurantes que não possuem culinária do tipo American . (utilizando o atributo cuisine )
-
-
+db.restaurants.find({cuisine: {$ne: "American"}}).count()
 
 // Selecione e faça a contagem dos restaurantes que possuem avaliação maior ou igual a 8 . (utilizando o atributo rating )
-
-
+db.restaurants.find({rating: {$gte: 8}}).count();
 
 // Selecione e faça a contagem dos restaurantes que possuem avaliação menor que 4 .
-
-
+db.restaurants.find({rating: {$lt: 4}}).count();
 
 // Selecione e faça a contagem dos restaurantes que não possuem as avaliações 5 , 6 e 7 .
+db.restaurants.find({rating: {$nin:[5,6,7 ]}}).count();
+
+// Selecione e faça a contagem dos restaurantes que não possuem avaliação menor ou igual a 5 , essa consulta também deve retornar restaurantes que não possuem o campo avaliação.
 
 
-Faça os desafios de 1 a 5 abaixo, sobre os operadores lógicos utilizando a coleção restaurants criada no tópico anterior.
-Selecione e faça a contagem dos restaurantes que não possuem avaliação menor ou igual a 5 , essa consulta também deve retornar restaurantes que não possuem o campo avaliação.
-Selecione e faça a contagem dos restaurantes em que a avaliação seja maior ou igual a 6 , ou restaurantes localizados no bairro Brooklyn .
-Selecione e faça a contagem dos restaurantes localizados nos bairros Queens , Staten Island e Broklyn e possuem avaliação maior que 4 .
-Selecione e faça a contagem dos restaurantes onde nem o campo avaliação seja igual a 1 , nem o campo culinária seja do tipo American .
-Selecione e faça a contagem dos resturantes em que a avaliação seja maior que 6 ou menor que 10 , E esteja localizado no bairro Brooklyn , OU não possuem culinária do tipo Delicatessen .
+// Selecione e faça a contagem dos restaurantes em que a avaliação seja maior ou igual a 6 , ou restaurantes localizados no bairro Brooklyn .
+
+
+// Selecione e faça a contagem dos restaurantes localizados nos bairros Queens , Staten Island e Broklyn e possuem avaliação maior que 4 .
+
+
+// Selecione e faça a contagem dos restaurantes onde nem o campo avaliação seja igual a 1 , nem o campo culinária seja do tipo American .
+
+
+// Selecione e faça a contagem dos resturantes em que a avaliação seja maior que 6 ou menor que 10 , E esteja localizado no bairro Brooklyn , OU não possuem culinária do tipo Delicatessen .
