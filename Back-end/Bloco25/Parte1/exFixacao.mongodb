@@ -41,3 +41,227 @@ db.transactions.aggregate([
   }
 ])
 
+db.sales.insertMany([
+{
+  _id: 1,
+  item: "Código Limpo",
+  price: NumberDecimal("10"),
+  quantity: NumberInt("2"),
+  date: ISODate("2014-03-01T08:00:00Z")
+},
+{
+  _id: 2,
+  item: "O Homem e Seus Símbolos",
+  price: NumberDecimal("20"),
+  quantity: NumberInt("1"),
+  date: ISODate("2014-03-01T09:00:00Z")
+},
+{
+  _id: 3,
+  item: "Comunicação Não-Violenta",
+  price: NumberDecimal("5"),
+  quantity: NumberInt( "10"),
+  date: ISODate("2014-03-15T09:00:00Z")
+},
+{
+  _id: 4,
+  item: "Comunicação Não-Violenta",
+  price: NumberDecimal("5"),
+  quantity:  NumberInt("20"),
+  date: ISODate("2014-04-04T11:21:39.736Z")
+},
+{
+  _id: 5,
+  item: "Código Limpo",
+  price: NumberDecimal("10"),
+  quantity: NumberInt("10"),
+  date: ISODate("2014-04-04T21:23:13.331Z")
+},
+{
+  _id: 6,
+  item:"A Coragem de Ser Imperfeito",
+  price: NumberDecimal("7.5"),
+  quantity: NumberInt("5" ),
+  date: ISODate("2015-06-04T05:08:13Z")
+},
+{
+  _id: 7,
+  item: "A Coragem de Ser Imperfeito",
+  price: NumberDecimal("7.5"),
+  quantity: NumberInt("10"),
+  date: ISODate("2015-09-10T08:43:00Z")
+},
+{
+  _id: 8,
+  item: "Código Limpo",
+  price: NumberDecimal("10"),
+  quantity: NumberInt("5" ),
+  date: ISODate("2016-02-06T20:20:13Z")
+}
+])
+
+db.sales.find()
+
+// db.sales.aggregate([
+//   {
+// $group : {
+//       _id : "$item",
+//       totalSaleAmount: {
+//         $multiply: ["$price", "$quantity"]
+//       }
+//     }
+//   }
+// ]);
+//  Por que esse anaterior não funciona e o de baixo sim?
+db.sales.aggregate([
+  {
+$group : {
+      _id : "$item",
+      totalSaleAmount: {
+        $sum: {
+        $multiply: ["$price", "$quantity"]
+        }
+      }
+    }
+  }
+]);
+
+//  ---------------------------------------------------------------------
+// Para Fixar
+// Utilizando o banco de dados agg_example e a coleção transactions , faça os exercícios:
+// Selecione todos os bancos, ou seja, valores do campo bank ;
+db.transactions.aggregate([
+  {
+$group: {
+      _id: 'bank',
+      bank: { $sum: 1 }
+    }
+  }
+]);
+//  Essa mostrou o total de bancos pois o acumlador era generico. Então entendeu que deveria juntar tudo.
+db.transactions.aggregate([
+  {
+$group: {
+      _id: '$bank',
+      bank: { $sum: 1 }
+    }
+  }
+]);
+//  NEssa anterior o acumulador se referia a bank pois utiliza o $ que quer dizer que se refere ao item da coleção em questão.
+
+// Selecione o valor total das transações em cada banco e quantas são;
+db.transactions.aggregate([
+  { 
+  $group: {
+    _id: '$bank',
+    totalValue: {
+      $sum: '$value'
+    },
+    transações: { $sum: 1 },
+  }}
+])
+
+
+// Selecione o valor total de transações por banco;
+db.transactions.aggregate([
+  { $group: {
+    _id: '$bank',
+    transações: {$sum: '$value'}
+  }}
+])
+
+
+// Selecione os bancos que têm o valor total de transações maior que 1000.
+db.transactions.aggregate([
+  { $group: {
+    _id: '$bank',
+    total: { $sum: '$value'}
+  }},
+   { 
+    $match: {
+      total: {$gt: 1000}
+    }}
+])
+
+//  ---------------------------------------------------------------------
+// Para Fixar
+// Utilizando o banco de dados agg_example , adicione a seguinte collection e faça os exercícios:
+use agg_example;
+db.clients.insertMany([
+  { name: "Dave America", State: "Florida" },
+  { name: "Ned Flanders", State: "Alasca" },
+  { name: "Mark Zuck", State: "Texas" },
+  { name: "Edna Krabappel", State: "Montana" },
+  { name: "Arnold Schuz", State: "California" },
+  { name: "Lisa Simpson", State: "Florida" },
+  { name: "Barney Gumble", State: "Texas" },
+  { name: "Homer Simpson", State: "Florida" },
+]);
+
+db.transactions.find()
+// Selecione todos os clientes com as suas respectivas transações feitas;
+db.clients.aggregate([
+  {
+    /**
+     * from: The target collection.
+     * localField: The local join field.
+     * foreignField: The target join field.
+     * as: The name for the results.
+     * pipeline: The pipeline to run on the joined collection.
+     * let: Optional variables to use in the pipeline field stages.
+     */
+    $lookup: {
+      from: 'transactions',
+      localField: 'name',
+      foreignField: 'from',
+      as: 'transações'
+    }
+  },
+  { /**
+   * specifications: The fields to
+   *   include or exclude.
+   */
+  $project: {
+    _id: 1,
+    'transações': 0
+  }}
+])
+
+
+
+// Selecione quatro clientes com as suas respectivas transações recebidas;
+db.clients.aggregate([
+  {
+  $lookup: {
+    from: 'transactions',
+    localField: 'name',
+    foreignField: 'from',
+    as: 'transações'
+  }},
+  {$limit: 4},
+  { /**
+   * Provide the field name for the count.
+   */
+  $count: 'total'}
+])
+
+
+// Selecione todos os cliente do estado da "Florida" e suas respectivas transações recebidas.
+db.clients.aggregate(
+  [
+    { $match: { State: "Florida" }},
+    { $lookup: {
+      from: 'transactions',
+      localField: 'name',
+      foreignField: 'to',
+      as: 'Transações da Florida'}
+    },
+    { 
+    $project: {
+      _id: 0,
+      State: 1,
+      'Transações da Florida': 1,
+      total: {$sum: 1}
+    }}
+  ]
+)
