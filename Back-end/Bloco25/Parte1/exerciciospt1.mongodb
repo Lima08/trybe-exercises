@@ -5,9 +5,9 @@
 // mongoimport --db erp <caminho_do_arquivo_vendas.json>
 
 // Conecte-se à sua instância e confira o número de documentos em cada coleção:
-
+show collections
 use erp;
-db.clientes.count(); // 499
+db.clientes.findOne(); // 499
 db.produtos.count(); // 499
 db.vendas.count(); // 4900
 
